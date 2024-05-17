@@ -241,7 +241,7 @@ func yaml_emitter_increase_indent(emitter *yaml_emitter_t, flow, indentless bool
 			emitter.indent += 2
 		} else {
 			// Everything else aligns to the chosen indentation.
-			emitter.indent = emitter.best_indent*((emitter.indent+emitter.best_indent)/emitter.best_indent)
+			emitter.indent = emitter.best_indent * ((emitter.indent + emitter.best_indent) / emitter.best_indent)
 		}
 	}
 	return true
@@ -1504,6 +1504,11 @@ func yaml_emitter_write_indent(emitter *yaml_emitter_t) bool {
 	}
 	for emitter.column < indent {
 		if !put(emitter, ' ') {
+			return false
+		}
+	}
+	if emitter.sequence_context {
+		if !put_break(emitter) {
 			return false
 		}
 	}
