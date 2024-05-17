@@ -1508,9 +1508,7 @@ func yaml_emitter_write_indent(emitter *yaml_emitter_t) bool {
 		}
 	}
 	if emitter.sequence_context {
-		if !put_break(emitter) {
-			return false
-		}
+		return false
 	}
 	emitter.whitespace = true
 	//emitter.indention = true
